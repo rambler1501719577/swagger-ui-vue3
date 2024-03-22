@@ -23,11 +23,42 @@
 <script setup>
 const routes = [
     {
+        path: '/login',
+        hidden: true
+    },
+
+    {
+        path: '/404',
+        hidden: true
+    },
+
+    {
         path: '/',
-        component: () => import('@/layout'),
+        redirect: '/dashboard',
         children: [
             {
-                path: 'example'
+                path: 'dashboard',
+                name: 'Dashboard',
+                meta: { title: 'Dashboard', icon: 'dashboard' }
+            }
+        ]
+    },
+
+    {
+        path: '/example',
+        redirect: '/example/table',
+        name: 'Example',
+        meta: { title: 'Example', icon: 'el-icon-s-help' },
+        children: [
+            {
+                path: 'table',
+                name: 'Table',
+                meta: { title: 'Table', icon: 'table' }
+            },
+            {
+                path: 'tree',
+                name: 'Tree',
+                meta: { title: 'Tree', icon: 'tree' }
             }
         ]
     }
