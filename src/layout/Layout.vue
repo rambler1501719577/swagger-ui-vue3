@@ -1,11 +1,15 @@
 <template>
     <div class="rambler-layout-container">
-        <div class="layout-header-container">
-            <layout-header></layout-header>
-        </div>
-        <div class="layout-main-content">
+        <div class="sidebar">
             <side-bar></side-bar>
-            <app-main></app-main>
+        </div>
+        <div class="layout-content">
+            <div class="header">
+                <layout-header></layout-header>
+            </div>
+            <div class="app-content">
+                <app-main></app-main>
+            </div>
         </div>
     </div>
 </template>
@@ -17,19 +21,21 @@ import { AppMain, LayoutHeader, SideBar } from './components/'
 <style scoped lang="less">
 .rambler-layout-container {
     height: 100%;
-    .layout-header-container {
-        box-sizing: border-box;
-        height: 60px;
-        background: #eee;
+    display: flex;
+    .sidebar {
+        width: 240px;
+        height: 100%;
+        background: rgb(186, 185, 185);
     }
-    .layout-main-content {
-        height: calc(100% - 60px);
-        box-sizing: border-box;
-        display: flex;
-        .sidebar {
-            width: 240px;
-            height: 100%;
-            background: rgb(186, 185, 185);
+    .layout-content {
+        height: 100%;
+        flex: 1;
+        .header {
+            height: 60px;
+            background: #ddd;
+        }
+        .app-content {
+            height: calc(100% - 60px);
         }
     }
 }

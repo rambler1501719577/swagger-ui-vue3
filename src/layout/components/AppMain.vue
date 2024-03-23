@@ -1,8 +1,10 @@
 <template>
     <section class="app-main">
-        <transition name="fade-transform" mode="out-in">
-            <router-view :key="routerKey" />
-        </transition>
+        <router-view :key="routerKey" v-slot="{ Component }">
+            <transition>
+                <component :is="Component" />
+            </transition>
+        </router-view>
     </section>
 </template>
 
@@ -23,4 +25,3 @@ const routerKey = computed(() => {
     flex: 1;
 }
 </style>
-

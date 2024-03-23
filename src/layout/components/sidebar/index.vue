@@ -1,7 +1,7 @@
 <template>
-    <div :class="{ 'has-logo': true }">
-        <logo :collapse="isCollapse" />
-        <el-scrollbar wrap-class="scrollbar-wrapper">
+    <div class="sidebar-container">
+        <logo />
+        <!-- <el-scrollbar wrap-class="scrollbar-wrapper">
             <el-menu
                 :default-active="activeMenu"
                 :collapse="isCollapse"
@@ -16,66 +16,29 @@
                     :base-path="route.path"
                 />
             </el-menu>
-        </el-scrollbar>
+        </el-scrollbar> -->
     </div>
 </template>
 
 <script setup>
-const routes = [
-    {
-        path: '/login',
-        hidden: true
-    },
-
-    {
-        path: '/404',
-        hidden: true
-    },
-
-    {
-        path: '/',
-        redirect: '/dashboard',
-        children: [
-            {
-                path: 'dashboard',
-                name: 'Dashboard',
-                meta: { title: 'Dashboard', icon: 'dashboard' }
-            }
-        ]
-    },
-
-    {
-        path: '/example',
-        redirect: '/example/table',
-        name: 'Example',
-        meta: { title: 'Example', icon: 'el-icon-s-help' },
-        children: [
-            {
-                path: 'table',
-                name: 'Table',
-                meta: { title: 'Table', icon: 'table' }
-            },
-            {
-                path: 'tree',
-                name: 'Tree',
-                meta: { title: 'Tree', icon: 'tree' }
-            }
-        ]
-    }
-]
-import { useRoute } from 'vue-router'
 import Logo from './Logo'
-import SidebarItem from './SidebarItem'
-import { computed } from 'vue'
-const route = useRoute()
-const activeMenu = computed(() => {
-    const { meta, path } = route
-    // if set path, the sidebar will highlight the path you set
-    if (meta.activeMenu) {
-        return meta.activeMenu
-    }
-    return path
-})
-const isCollapse = true
+// import { useRoute } from 'vue-router'
+// import Logo from './Logo'
+// import SidebarItem from './SidebarItem'
+// import { computed } from 'vue'
+// const route = useRoute()
+// const activeMenu = computed(() => {
+//     const { meta, path } = route
+//     // if set path, the sidebar will highlight the path you set
+//     if (meta.activeMenu) {
+//         return meta.activeMenu
+//     }
+//     return path
+// })
+// const isCollapse = true
 </script>
-
+<style lang="less" scoped>
+.sidebar-container {
+    width: 100%;
+}
+</style>
