@@ -22,6 +22,7 @@ const router = createRouter({
 router.beforeEach(async () => {
     try {
         const doc = await loadAllSwaggerDoc()
+        console.log(doc)
         localStorage.setItem('doc', JSON.stringify(doc))
     } catch (e) {
         localStorage.removeItem('doc')

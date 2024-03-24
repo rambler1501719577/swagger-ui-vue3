@@ -1,11 +1,19 @@
-const getDoc = () => {
-    const docStr = localStorage.getItem('doc')
-    if (!docStr) return ''
-    return JSON.parse(docStr)
+class SwaggerService {
+    doc = null
+    constructor() {
+        const docStr = localStorage.getItem('doc')
+        if (!docStr) return ''
+        this.doc = JSON.parse(docStr)
+    }
+    getVersion() {
+        return this.doc.swagger
+    }
+    getServices() {
+        return this.doc.services
+    }
+    setCurrentService(serviceUrl) {
+        console.log(serviceUrl)
+    }
 }
-// swagger版本
-export function getVersion() {
-    const doc = getDoc()
-    if (!doc) return ''
-    return doc.swagger
-}
+
+export default new SwaggerService()
