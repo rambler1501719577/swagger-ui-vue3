@@ -29,7 +29,7 @@
                         </template>
                         <!-- 通过route开启路由模式, 实体路由匹配方式为/defination/{实体名称} -->
                         <el-menu-item
-                            :index="'defination--' + defination.name"
+                            :index="'defination--' + defination"
                             :key="defination"
                             v-for="defination of Object.keys(currentServiceInfo.definations)"
                             >{{ defination }}</el-menu-item

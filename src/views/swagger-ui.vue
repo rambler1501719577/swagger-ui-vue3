@@ -12,7 +12,8 @@
                 <doc-header></doc-header>
             </div>
             <div class="app-content">
-                <swagger-ui-detail :mode="mode"></swagger-ui-detail>
+                <swagger-ui-detail v-if="hasDetail" :mode="mode"></swagger-ui-detail>
+                <span v-else>空</span>
             </div>
         </div>
     </div>
@@ -21,7 +22,7 @@
 <script setup>
 import { DocHeader, AsideBar, SwaggerUiDetail } from './components'
 import swaggerService from '@/utils/swagger'
-import { provide, ref } from 'vue'
+import { provide, ref, computed } from 'vue'
 const services = swaggerService.getServices()
 
 // 当前选择的微服务
@@ -31,6 +32,10 @@ let currentReqUrl = ref('')
 // 当前访问的实体定义
 let currentDefination = ref('')
 let mode = ref('api')
+
+const hasDetail = computed(() => {
+    return currentReqUrl.value !== '' || currentDefination.value !== ''
+})
 
 const handleServiceChange = val => (currentService.value = val)
 const handleUrlChange = newUrl => {
