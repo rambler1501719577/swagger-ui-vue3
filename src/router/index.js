@@ -1,6 +1,4 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import HelloWorld from '@/components/HelloWorld.vue'
-
 import loadAllSwaggerDoc from '@/api/modules/swagger-ui'
 
 const router = createRouter({
@@ -8,13 +6,7 @@ const router = createRouter({
     routes: [
         {
             path: '/',
-            component: () => import('@/layout'),
-            children: [
-                {
-                    path: 'example',
-                    component: HelloWorld
-                }
-            ]
+            component: () => import('@/views/swagger-ui')
         }
     ]
 })

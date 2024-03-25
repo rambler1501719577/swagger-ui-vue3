@@ -25,7 +25,6 @@ const formatTags = (tags, paths) => {
     tags.forEach(tag => {
         tag['urls'] = allAPIs.filter(v => v.tags.includes(tag.name))
     })
-    console.log(tags)
     return tags
 }
 

@@ -9,7 +9,7 @@ class SwaggerService {
         return this.doc.swagger
     }
     getServices() {
-        return this.doc.services
+        return this.doc.services || []
     }
     setCurrentService(serviceUrl) {
         console.log(serviceUrl)
