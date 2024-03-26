@@ -65,8 +65,7 @@ provide('currentDefination', currentDefination)
         height: 100%;
         flex: 1;
         .header {
-            height: 60px;
-            background: #ddd;
+            height: 52px;
         }
         .app-content {
             height: calc(100% - 60px);

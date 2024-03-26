@@ -1,10 +1,5 @@
 <template>
     <div class="sidebar-container">
-        <div class="sidebar-logo-container">
-            <h1>
-                微服务接口列表, <span>版本:{{ version }}</span>
-            </h1>
-        </div>
         <div class="sidebar-services-container">
             <div class="servivce-choose">
                 <el-select
@@ -70,7 +65,6 @@ const currentService = inject('currentService')
 const eventHandler = defineProps(['service-change', 'url-change', 'define-change'])
 
 // 版本
-const version = swaggerService.getVersion()
 const services = swaggerService.getServices()
 
 // // 文档详情
@@ -95,17 +89,9 @@ const handleMenuSelect = index => {
 .sidebar-container {
     width: 100%;
     height: 100%;
-    .sidebar-logo-container {
-        position: relative;
-        width: 100%;
-        height: 60px;
-        line-height: 60px;
-        background: #fff;
-        overflow: hidden;
-    }
     .sidebar-services-container {
         width: 100%;
-        height: calc(100% - 60px);
+        height: 100%;
         background: #ddd;
         .servivce-choose {
             padding: 10px;
