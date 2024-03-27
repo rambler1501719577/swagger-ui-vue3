@@ -1,5 +1,7 @@
 <template>
-    <div class="swagger-ui-detail">{{ docDefination }}</div>
+    <div class="swagger-ui-detail">
+        <pre>{{ docDefination.value }}</pre>
+    </div>
 </template>
 
 <script setup>
@@ -13,15 +15,16 @@ const currentService = inject('currentService')
 const currentDefination = inject('currentDefination')
 const services = swaggerService.getServices()
 
-const docDefination = reactive({})
+const docDefination = reactive({ properties: [] })
 
 watch(
     currentDefination,
     (newVal, _) => {
-        let doc = null
+        if (!newVal) return
         const aimService = services.find(s => s.serviceUrl == currentService.value)
         const key = newVal.split('--')[1]
         docDefination.value = aimService.definations[key]
+        console.log(docDefination.value)
     },
     { immediate: true }
 )

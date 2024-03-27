@@ -21,11 +21,17 @@
             </div>
             <div class="parameter-detail">
                 <el-table :data="docApi.value.parameters" style="width: 100%">
-                    <el-table-column prop="description" label="description" width="180" />
-                    <el-table-column prop="in" label="in" width="180" />
-                    <el-table-column prop="name" label="name" />
+                    <el-table-column prop="name" label="Name" />
+                    <el-table-column prop="description" label="Description" width="180" />
+                    <el-table-column prop="in" label="Parameter Type" width="180" />
+                    <el-table-column label="Value">
+                        <template #default="scope">
+                            <el-input type="file" v-if="scope.row.type == 'file'"></el-input>
+                            <el-input v-else></el-input>
+                        </template>
+                    </el-table-column>
                     <el-table-column prop="required" label="required"></el-table-column>
-                    <el-table-column prop="type" label="type"></el-table-column>
+                    <el-table-column prop="type" label="Data Type"></el-table-column>
                 </el-table>
             </div>
         </div>
