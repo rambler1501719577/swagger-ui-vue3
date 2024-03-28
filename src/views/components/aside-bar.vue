@@ -2,13 +2,9 @@
     <div class="sidebar-container">
         <div class="sidebar-services-container">
             <div class="servivce-choose">
-                <el-select
-                    v-model="store.currentService"
-                    placeholder="选择微服务"
-                    @change="handleServiceChange"
-                >
+                <el-select v-model="store.currentService" placeholder="选择微服务">
                     <el-option
-                        v-for="service in services"
+                        v-for="service in store.services"
                         :key="service.serviceUrl"
                         :label="service.serviceUrl"
                         :value="service.serviceUrl"
@@ -66,11 +62,11 @@ import { Location } from '@element-plus/icons-vue'
 const store = useDocStore()
 
 const handleMenuSelect = index => {
-    // if (index.startsWith('defination')) {
-    //     eventHandler.defineChange(index)
-    // } else {
-    //     eventHandler.urlChange(index)
-    // }
+    if (index.startsWith('defination')) {
+        store.setCurrentDefination(index)
+    } else {
+        store.setCurrentReqUrl(index)
+    }
 }
 </script>
 <style lang="less" scoped>

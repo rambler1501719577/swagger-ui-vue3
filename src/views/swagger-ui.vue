@@ -1,11 +1,7 @@
 <template>
     <div class="rambler-layout-container">
         <div class="sidebar">
-            <aside-bar
-                :service-change="handleServiceChange"
-                :url-change="handleUrlChange"
-                :define-change="handleDefineChange"
-            ></aside-bar>
+            <aside-bar></aside-bar>
         </div>
         <div class="layout-content">
             <div class="header">
@@ -21,34 +17,13 @@
 
 <script setup>
 import { DocHeader, AsideBar, SwaggerUiDetail } from './components'
-import swaggerService from '@/utils/swagger'
-import { provide, ref, computed } from 'vue'
-const services = swaggerService.getServices()
-
-// 当前选择的微服务
-let currentService = ref(services[0].serviceUrl)
-// 当前访问的url
-let currentReqUrl = ref('')
-// 当前访问的实体定义
-let currentDefination = ref('')
-let mode = ref('api')
+import { computed } from 'vue'
+import { useDocStore } from '@/store'
+const store = useDocStore()
 
 const hasDetail = computed(() => {
-    return currentReqUrl.value !== '' || currentDefination.value !== ''
+    return store.currentReqUrl == '' || store.currentDefination == ''
 })
-
-const handleServiceChange = val => (currentService.value = val)
-const handleUrlChange = newUrl => {
-    currentReqUrl.value = newUrl
-    mode.value = 'api'
-}
-const handleDefineChange = newDefination => {
-    currentDefination.value = newDefination
-    mode.value = 'defination'
-}
-provide('currentService', currentService)
-provide('currentReqUrl', currentReqUrl)
-provide('currentDefination', currentDefination)
 </script>
 
 <style scoped lang="less">

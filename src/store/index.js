@@ -9,6 +9,9 @@ export const useDocStore = defineStore('docs', {
         docInfo: null // 每个服务对应的接口文档
     }),
     getters: {
+        services: state => {
+            return state.docInfo?.services
+        },
         version: state => {
             return state.docInfo?.swagger || '1.0'
         },
@@ -22,11 +25,22 @@ export const useDocStore = defineStore('docs', {
             }
             return null
         },
+        currentApi: state => {
+            if (!state.currentService || !state.currentReqUrl) {
+                return null
+            }
+            const [_, method, url] = state.currentReqUrl.split('--')
+            const api = {
+                method,
+                url,
+                ...state.currentServiceDoc.paths[url][method]
+            }
+            return api
+        },
         // 获取当前服务的所有标签信息及其他信息
         tags: state => {
-            const tags = []
             if (state.currentServiceDoc) {
-                tags.push(...state.currentServiceDoc.tags)
+                return state.currentServiceDoc.tags
             }
             return []
         },

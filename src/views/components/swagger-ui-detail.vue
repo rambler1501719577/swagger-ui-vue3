@@ -6,6 +6,8 @@
 </template>
 
 <script setup>
+import swaggerUiApi from './detail/swagger-ui-api'
+import swaggerUiDefination from './detail/swagger-ui-defination'
 import { useDocStore } from '@/store'
 const store = useDocStore()
 </script>
