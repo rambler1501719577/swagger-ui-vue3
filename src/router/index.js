@@ -1,5 +1,8 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import loadAllSwaggerDoc from '@/api/modules/swagger-ui'
+import { useDocStore } from '../store'
+// const docStore = useDocStore()
+// docStore.registeService()
 
 const router = createRouter({
     history: createWebHashHistory(),
@@ -14,7 +17,7 @@ const router = createRouter({
 router.beforeEach(async () => {
     try {
         const doc = await loadAllSwaggerDoc()
-        console.log(doc)
+        // docStore.toggleData()
         localStorage.setItem('doc', JSON.stringify(doc))
     } catch (e) {
         localStorage.removeItem('doc')

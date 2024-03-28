@@ -3,7 +3,7 @@
         <div class="sidebar-services-container">
             <div class="servivce-choose">
                 <el-select
-                    v-model="currentService"
+                    v-model="store.currentService"
                     placeholder="选择微服务"
                     @change="handleServiceChange"
                 >
@@ -16,7 +16,14 @@
                 </el-select>
             </div>
             <div class="service-api-list">
-                <el-menu default-active="1" unique-opened @select="handleMenuSelect">
+                <el-menu
+                    default-active="1"
+                    unique-opened
+                    @select="handleMenuSelect"
+                    background-color="#fff0"
+                    text-color="#fff"
+                    active-text-color="#0073FF"
+                >
                     <el-sub-menu index="1">
                         <template #title>
                             <el-icon><Location /></el-icon>
@@ -26,15 +33,11 @@
                         <el-menu-item
                             :index="'defination--' + defination"
                             :key="defination"
-                            v-for="defination of Object.keys(currentServiceInfo.definations)"
+                            v-for="defination of store.definations"
                             >{{ defination }}</el-menu-item
                         >
                     </el-sub-menu>
-                    <el-sub-menu
-                        :index="tag.name"
-                        :key="tag.name"
-                        v-for="tag of currentServiceInfo.tags"
-                    >
+                    <el-sub-menu :index="tag.name" :key="tag.name" v-for="tag of store.tags">
                         <template #title>
                             <el-icon><Location /></el-icon>
                             <span>{{ tag.name }}</span>
@@ -58,41 +61,30 @@
 </template>
 
 <script setup>
-import swaggerService from '@/utils/swagger'
+import { useDocStore } from '@/store'
 import { Location } from '@element-plus/icons-vue'
-import { inject, computed, defineProps } from 'vue'
-const currentService = inject('currentService')
-const eventHandler = defineProps(['service-change', 'url-change', 'define-change'])
-
-// 版本
-const services = swaggerService.getServices()
-
-// // 文档详情
-let currentServiceInfo = computed(() => {
-    return services.find(v => v.serviceUrl == currentService.value)
-})
-
-// 版本切换后更新到父组件currentService
-const handleServiceChange = val => {
-    eventHandler.serviceChange(val)
-}
+const store = useDocStore()
 
 const handleMenuSelect = index => {
-    if (index.startsWith('defination')) {
-        eventHandler.defineChange(index)
-    } else {
-        eventHandler.urlChange(index)
-    }
+    // if (index.startsWith('defination')) {
+    //     eventHandler.defineChange(index)
+    // } else {
+    //     eventHandler.urlChange(index)
+    // }
 }
 </script>
 <style lang="less" scoped>
 .sidebar-container {
     width: 100%;
     height: 100%;
+    background: url('../../assets/left_nav_bg.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-y: bottom;
+    overflow: hidden;
     .sidebar-services-container {
         width: 100%;
         height: 100%;
-        background: #ddd;
         .servivce-choose {
             padding: 10px;
             box-sizing: border-box;

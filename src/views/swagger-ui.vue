@@ -57,7 +57,7 @@ provide('currentDefination', currentDefination)
     height: 100%;
     display: flex;
     .sidebar {
-        width: 240px;
+        width: 260px;
         height: 100%;
         background: rgb(186, 185, 185);
     }

@@ -1,14 +1,13 @@
 <template>
     <div class="layout-header">
         <h2>接口文档</h2>
-        <el-tag>{{ version }}</el-tag>
+        <el-tag disable-transitions>{{ store.version }}</el-tag>
     </div>
 </template>
 
 <script setup>
-import swaggerService from '@/utils/swagger'
-// 版本
-const version = swaggerService.getVersion()
+import { useDocStore } from '@/store'
+const store = useDocStore()
 </script>
 
 <style lang="less" scoped>
@@ -18,8 +17,11 @@ const version = swaggerService.getVersion()
     overflow: hidden;
     display: flex;
     align-items: center;
-    background: #fff;
-    border-bottom: 1px solid #71baff;
+    background: #032970;
     box-sizing: border-box;
+    color: #fff;
+    h2 {
+        margin-right: 10px;
+    }
 }
 </style>
