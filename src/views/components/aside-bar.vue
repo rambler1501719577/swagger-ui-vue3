@@ -2,7 +2,11 @@
     <div class="sidebar-container">
         <div class="sidebar-services-container">
             <div class="servivce-choose">
-                <el-select v-model="store.currentService" placeholder="选择微服务">
+                <el-select
+                    v-model="store.currentService"
+                    placeholder="选择微服务"
+                    @change="handleServiceChange"
+                >
                     <el-option
                         v-for="service in store.services"
                         :key="service.serviceUrl"
@@ -13,7 +17,6 @@
             </div>
             <div class="service-api-list">
                 <el-menu
-                    default-active="1"
                     unique-opened
                     @select="handleMenuSelect"
                     background-color="#fff0"
@@ -67,6 +70,10 @@ const handleMenuSelect = index => {
     } else {
         store.setCurrentReqUrl(index)
     }
+}
+
+const handleServiceChange = () => {
+    store.setCurrentDefination('')
 }
 </script>
 <style lang="less" scoped>

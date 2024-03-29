@@ -42,13 +42,13 @@
             <div class="response-detail">
                 <el-tabs v-model="tab">
                     <el-tab-pane
-                        v-for="responseTab of Object.keys(store.currentApi.response)"
+                        v-for="responseTab of store.currentApi.response"
                         :key="responseTab.code"
                         :label="responseTab.code"
                         :name="responseTab.code"
                     >
                         <div>
-                            {{ responseTab }}
+                            <pre>{{ responseTab }}</pre>
                         </div>
                     </el-tab-pane>
                 </el-tabs>
@@ -68,7 +68,8 @@ const store = useDocStore()
         padding: 10px;
         box-sizing: border-box;
         margin-bottom: 10px;
-        background: #eee;
+        background: #fff;
+        border-radius: 4px;
         .title {
             height: 30px;
             line-height: 30px;

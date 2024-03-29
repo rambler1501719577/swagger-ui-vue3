@@ -6,6 +6,7 @@ import 'element-plus/dist/index.css'
 import '@/styles/reset.css'
 import '@/styles/global.less'
 import '@/styles/variable.less'
+import '@/styles/reset-element.less'
 
 import RequestMethod from '@/components/request-method'
 const pinia = createPinia()

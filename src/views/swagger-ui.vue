@@ -34,16 +34,19 @@ const hasDetail = computed(() => {
     .sidebar {
         width: 260px;
         height: 100%;
-        background: rgb(186, 185, 185);
     }
     .layout-content {
         height: 100%;
+        overflow: hidden auto;
         flex: 1;
         .header {
             height: 52px;
         }
         .app-content {
             height: calc(100% - 60px);
+            padding: 10px;
+            background: rgb(235, 235, 235);
+            box-sizing: border-box;
         }
     }
 }

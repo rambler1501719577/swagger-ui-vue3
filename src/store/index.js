@@ -25,15 +25,55 @@ export const useDocStore = defineStore('docs', {
             }
             return null
         },
+        // 当前选中实体定义
+        currentEntity: state => {
+            if (!state.currentService || !state.currentDefination) {
+                return null
+            }
+            const [_, definationName] = state.currentDefination.split('--')
+            const entity = state.currentServiceDoc.definations[definationName]
+            const defination = []
+            if (entity.type == 'object') {
+                const kvs = Object.keys(entity.properties).map(e => ({
+                    name: e,
+                    type: entity.properties[e].type || '无'
+                }))
+                defination.push(...kvs)
+            }
+            return defination
+        },
+        // 当前选中接口详情
         currentApi: state => {
             if (!state.currentService || !state.currentReqUrl) {
                 return null
             }
             const [_, method, url] = state.currentReqUrl.split('--')
+            const apiDetail = state.currentServiceDoc.paths[url][method]
+            const response = Object.keys(apiDetail.responses).map(r => {
+                const res = apiDetail.responses[r]
+                // 响应状态码和相应描述
+                const returnVal = {
+                    code: r,
+                    description: res?.description
+                }
+                if (res.schema) {
+                    if (res.schema.$ref) {
+                        // todo 这里的schema可能是对象嵌套对象， 需要递归替换调所有的$ref引用的对象
+                        const schemaKey = res.schema.$ref.replace('#/definitions/', '')
+                        const schema = state.currentServiceDoc.definations[schemaKey]
+                        returnVal['schema'] = schema
+                    } else {
+                        // 直接返回字符串，会被包装成这个
+                        returnVal['schema'] = res.schema
+                    }
+                }
+                return returnVal
+            })
             const api = {
                 method,
                 url,
-                ...state.currentServiceDoc.paths[url][method]
+                ...apiDetail,
+                response
             }
             return api
         },
