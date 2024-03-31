@@ -8,7 +8,7 @@
                 <doc-header></doc-header>
             </div>
             <div class="app-content">
-                <swagger-ui-detail v-if="hasDetail" :mode="mode"></swagger-ui-detail>
+                <swagger-ui-detail v-if="hasDetail"></swagger-ui-detail>
                 <span v-else>空</span>
             </div>
         </div>

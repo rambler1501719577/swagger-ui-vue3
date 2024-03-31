@@ -65,10 +65,11 @@ import { Location } from '@element-plus/icons-vue'
 const store = useDocStore()
 
 const handleMenuSelect = index => {
+    const decodedURL = decodeURI(index)
     if (index.startsWith('defination')) {
-        store.setCurrentDefination(index)
+        store.setCurrentDefination(decodedURL)
     } else {
-        store.setCurrentReqUrl(index)
+        store.setCurrentReqUrl(decodedURL)
     }
 }
 

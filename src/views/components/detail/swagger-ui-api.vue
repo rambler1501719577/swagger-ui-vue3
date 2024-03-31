@@ -11,7 +11,7 @@
                     ></template>
                 </el-input>
                 <div class="action">
-                    <el-button size="medium" type="primary">执行</el-button>
+                    <el-button @click="execute" type="primary">执行</el-button>
                 </div>
             </div>
         </div>
@@ -54,12 +54,43 @@
                 </el-tabs>
             </div>
         </div>
+        <div class="real-response common-part">
+            <div class="title">
+                <h1>响应结果</h1>
+            </div>
+            <div class="response-detail">
+                <pre>{{ response.value?.data }}</pre>
+            </div>
+        </div>
     </div>
 </template>
 
 <script setup>
+import request from '@/api/request'
 import { useDocStore } from '@/store'
+import { reactive, ref } from 'vue'
 const store = useDocStore()
+const response = reactive({})
+
+let tab = ref('200')
+
+const execute = () => {
+    const [_, method, url] = store.currentReqUrl.split('--')
+    let requestPrefix = store.currentService.split('/')[1]
+    request({
+        method: method,
+        url: `/${requestPrefix}${url}`,
+        params: {},
+        data: {},
+        headers: {}
+    })
+        .then(res => {
+            response.value = res
+        })
+        .catch(e => {
+            console.error(e)
+        })
+}
 </script>
 
 <style lang="less" scoped>
